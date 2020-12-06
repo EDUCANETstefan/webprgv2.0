@@ -1,0 +1,26 @@
+<ul class="nav justify-content-center">
+
+  <li>
+    <div class="sidebarT" >
+      <button (click)="clicked.emit()">SIDEBAR</button>
+    </div>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" routerLink="/home" >Home</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" routerLink="/about">About</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" routerLink="/contact">Contact</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" routerLink="user.create">Register</a>
+  </li>
+
+  <div class="active-cyan-4 mb-4">
+    <input [(ngModel)]="searchLink" class="form-control" type="text" placeholder="Search" aria-label="Search">
+    <a *ngFor="let option of filter()" [routerLink]="option.link"> {{option.title}}</a>
+  </div>
+
+</ul>

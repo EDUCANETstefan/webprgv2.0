@@ -1,0 +1,25 @@
+<h1>Contact us here:</h1>
+
+<form class="form" (ngSubmit)="sendConsole()">
+
+  <div class="form-row">
+
+    <div class="col-7">
+      <input name="text" type="text" [(ngModel)]="text"  class="form-control" placeholder="Text">
+    </div>
+
+    <div class="col">
+      <input name="email" type="email" [(ngModel)]="email"  class="form-control" placeholder="Email">
+    </div>
+
+    <div class="col">
+      <input name="name" type="name" [(ngModel)]="name"  class="form-control" placeholder="Name">
+    </div>
+
+    <div class="col-auto">
+      <button type="submit" (click)="sendConsole()" class="btn btn-primary mb-2">Send</button>
+    </div>
+
+  </div>
+
+</form>
