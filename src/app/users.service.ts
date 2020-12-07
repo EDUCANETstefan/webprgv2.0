@@ -12,7 +12,7 @@ export interface IUserEntity {
   providedIn: 'root'
 })
 export class UsersService {
-  private id = 0;
+  private id = 1;
   private users: IUserEntity[] = [];
 
   constructor() { }
@@ -35,7 +35,7 @@ export class UsersService {
   }
 
   getUserById(idNumber: number): Observable<IUserEntity> {
-    return of(this.users.find(u => u.id === this.id));
+    return of(this.users.find(u => u.id === idNumber));
 
   }
 

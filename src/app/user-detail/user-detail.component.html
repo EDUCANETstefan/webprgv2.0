@@ -1,11 +1,37 @@
-<div id="userinfo">
+<div *ngIf="user" id="userinfo">
 
   <h1 class=username>
-    <p>User:</p> {{user.username}}
+    User: {{user.username}}
   </h1>
 
-  <label>{{user.id}}</label>
-  <label>{{user.username}}</label>
-  <label>{{user.password}}</label>
+  <div class="userInfo">
+    <h3>Id:</h3><label>{{user.id}}</label>
+    <h3>Username:</h3><label>{{user.username}}</label>
+    <h3>Password:</h3><label>{{user.password}}</label>
+  </div>
+
 
 </div>
+
+<div class="editUser">
+
+  <h1 class="editH">Edit user here:</h1>
+
+  <div class="form-row">
+
+    <div class="col">
+      <input name="name" type="name" [(ngModel)]="newUsername" class="form-control" placeholder="Username">
+    </div>
+
+    <div class="col">
+      <input name="password" type="password" [(ngModel)]="newPassword" class="form-control" placeholder="Password">
+    </div>
+
+    <div class="col-auto">
+      <button type="submit" (click)="clickedEdit()" class="btn btn-primary mb-2">Edit</button>
+    </div>
+
+  </div>
+
+</div>
+

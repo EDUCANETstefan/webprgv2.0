@@ -10,6 +10,8 @@ import {IUserEntity, UsersService} from '../users.service';
 export class UserDetailComponent implements OnInit {
 
   user: IUserEntity;
+  newUsername = "";
+  newPassword = "";
 
   constructor(
     private readonly  activatedRoute: ActivatedRoute,
@@ -22,10 +24,20 @@ export class UserDetailComponent implements OnInit {
         const id = p.get('id');
         const idNumber = parseInt(id, 10);
         this.usersService.getUserById(idNumber).subscribe(
-          u => this.user = u,
+          u => {this.user = u;
+            console.debug(u);
+          },
           e => console.error(e));
+
       }
     );
   }
+
+  clickedEdit() {
+    this.user.username = this.newUsername;
+    this.user.password = this.newPassword;
+    console.log(this.user.username, this.user.password);
+  }
+
 
 }
