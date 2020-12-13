@@ -39,4 +39,11 @@ export class UsersService {
 
   }
 
+  editUser(editedUsername: string, editedPassword: string): Observable<IUserEntity> {
+    const editedUser: IUserEntity = {id: this.id, username: editedUsername, password: editedPassword};
+    this.users.push(editedUser);
+    return of(editedUser);
+
+  }
+
 }

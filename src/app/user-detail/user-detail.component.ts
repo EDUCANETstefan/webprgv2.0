@@ -10,8 +10,8 @@ import {IUserEntity, UsersService} from '../users.service';
 export class UserDetailComponent implements OnInit {
 
   user: IUserEntity;
-  newUsername = "";
-  newPassword = "";
+  newUsername: string;
+  newPassword: string;
 
   constructor(
     private readonly  activatedRoute: ActivatedRoute,
@@ -34,9 +34,7 @@ export class UserDetailComponent implements OnInit {
   }
 
   clickedEdit() {
-    this.user.username = this.newUsername;
-    this.user.password = this.newPassword;
-    console.log(this.user.username, this.user.password);
+    this.usersService.editUser(this.user.username = this.newUsername, this.user.password = this.newPassword);
   }
 
 
