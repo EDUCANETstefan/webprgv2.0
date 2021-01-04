@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {IUserEntity, UsersService} from '../users.service';
 
 @Component({
@@ -15,7 +15,8 @@ export class UserDetailComponent implements OnInit {
 
   constructor(
     private readonly  activatedRoute: ActivatedRoute,
-    private readonly  usersService: UsersService
+    private readonly  usersService: UsersService,
+    private readonly router: Router
   ) { }
 
   ngOnInit(): void {
@@ -34,7 +35,11 @@ export class UserDetailComponent implements OnInit {
   }
 
   clickedEdit() {
-    this.usersService.editUser(this.user.username = this.newUsername, this.user.password = this.newPassword);
+    this.usersService.editUser(this.user.id, this.newUsername, this.newPassword)
+      .subscribe(
+        u => this.router.navigateByUrl("/home")
+    );
+    console.log(this.user.username, this.user.password);
   }
 
 

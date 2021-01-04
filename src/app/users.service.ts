@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Observable, of} from "rxjs";
+import {error} from "@angular/compiler/src/util";
 
 
 export interface IUserEntity {
@@ -14,6 +15,7 @@ export interface IUserEntity {
 export class UsersService {
   private id = 1;
   private users: IUserEntity[] = [];
+
 
   constructor() { }
 
@@ -39,10 +41,16 @@ export class UsersService {
 
   }
 
-  editUser(editedUsername: string, editedPassword: string): Observable<IUserEntity> {
-    const editedUser: IUserEntity = {id: this.id, username: editedUsername, password: editedPassword};
-    this.users.push(editedUser);
-    return of(editedUser);
+  editUser(id: number, newUsername: string, newPassword: string): Observable<IUserEntity> {
+    for (let user of this.users) {
+      if (user.id == id) {
+        user.username = newUsername;
+        user.password = newPassword;
+        this.users.push(user);
+        return of(user);
+      } else return (error("user not found"));
+    }
+
 
   }
 
