@@ -5,9 +5,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class MyUppercasePipe implements PipeTransform {
 
-  transform(value: string, length: number, dots: string): string {
-
-    return null;
+  transform(value: string): string {
+    const dots = "...";
+    const limit = 3;
+    if(value.length > limit) return value.substring(0, limit) + dots;
+      else return value;
   }
 
 }
