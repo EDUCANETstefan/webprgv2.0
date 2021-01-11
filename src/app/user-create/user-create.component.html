@@ -1,22 +1,39 @@
 <h1>Register here:</h1>
 
-<div class="register">
+<form #form=ngForm>
+  <div class="register">
 
-  <div class="form-row">
+    <div class="form-row">
 
-    <div class="col">
-      <input name="name" type="name" [(ngModel)]="username"  class="form-control" placeholder="Username">
-    </div>
+      <div class="col">
+        <input required minlength="3" maxlength="20" #userUsername="ngModel" name="name" type="name" [(ngModel)]="username"  class="form-control" placeholder="Username">
+      </div>
 
-    <div class="col">
-      <input name="password" type="password" [(ngModel)]="password"  class="form-control" placeholder="Password">
-    </div>
+      <div *ngIf="userUsername.invalid && userUsername.touched">
+        <span *ngIf="userUsername.errors.required">Type your username</span>
+        <span *ngIf="userUsername.errors.minlength">Username is too short</span>
+        <span *ngIf="userUsername.errors.maxlength">Username is too long</span>
+      </div>
 
-    <div class="col-auto">
-      <button type="submit" (click)="createU()" class="btn btn-primary mb-2">Register</button>
+      <div class="col">
+        <input required minlength="3" maxlength="20" #userPassword="ngModel" name="password" type="password" [(ngModel)]="password"  class="form-control" placeholder="Password">
+      </div>
+
+      <div *ngIf="userPassword.invalid && userPassword.touched">
+        <span *ngIf="userPassword.errors.required">Type your password</span>
+        <span *ngIf="userPassword.errors.minlength">Password is too short</span>
+        <span *ngIf="userPassword.errors.maxlength">Password is too long</span>
+      </div>
+
+
+
+      <div class="col-auto">
+        <button [disabled]="form.invalid" type="submit" (click)="createU()" class="btn btn-primary mb-2">Register</button>
+      </div>
+
     </div>
 
   </div>
 
-</div>
+</form>
 

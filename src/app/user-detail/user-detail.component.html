@@ -1,37 +1,50 @@
 <div *ngIf="user" id="userinfo">
 
-  <h1 class=username>
-    User: {{user.username}}
-  </h1>
-
   <div class="userInfo">
     <h3>Id:</h3><label>{{user.id}}</label>
-    <h3>Username:</h3><label>{{user.username | myUppercase}}</label>
+    <h3>Username:</h3><label>{{user.username | myUppercase: 6: "..."}}</label>
     <h3>Password:</h3><label>{{user.password}}</label>
   </div>
 
+  {{'abcdefg' | myUppercase:6:'..............'}}
 
 </div>
 
-<div class="editUser">
+<form #form="ngForm">
+  <div class="editUser">
 
-  <h1 class="editH">Edit user here:</h1>
+    <h1 class="editH">Edit user here:</h1>
 
-  <div class="form-row">
+    <div class="form-row">
 
-    <div class="col">
-      <input name="name" type="name" [(ngModel)]="newUsername" class="form-control" placeholder="Username">
-    </div>
+      <div class="col">
+        <input required minlength="3" maxlength="20" #userUsername="ngModel" name="name" type="name" [(ngModel)]="newUsername" class="form-control" placeholder="Username">
+      </div>
 
-    <div class="col">
-      <input name="password" type="password" [(ngModel)]="newPassword" class="form-control" placeholder="Password">
-    </div>
+      <div *ngIf="userUsername.invalid && userUsername.touched">
+        <span *ngIf="userUsername.errors.required">Type your username</span>
+        <span *ngIf="userUsername.errors.minlength">Username is too short</span>
+        <span *ngIf="userUsername.errors.maxlength">Username is too long</span>
+      </div>
 
-    <div class="col-auto">
-      <button type="submit" (click)="clickedEdit()" class="btn btn-primary mb-2">Edit</button>
+      <div class="col">
+        <input required minlength="3" maxlength="20" #userPassword="ngModel" name="password" type="password" [(ngModel)]="newPassword" class="form-control" placeholder="Password">
+      </div>
+
+      <div *ngIf="userPassword.invalid && userPassword.touched">
+        <span *ngIf="userPassword.errors.required">Type your password</span>
+        <span *ngIf="userPassword.errors.minlength">Password is too short</span>
+        <span *ngIf="userPassword.errors.maxlength">Password is too long</span>
+
+      </div>
+
+      <div class="col-auto">
+        <button [disabled]="form.invalid" type="submit" (click)="clickedEdit()" class="btn btn-primary mb-2">Edit</button>
+      </div>
+
     </div>
 
   </div>
+</form>
 
-</div>
 
